@@ -1,0 +1,20 @@
+<div class="courses-filter-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Filtrar por categoria</mat-label>
+      <mat-select (selectionChange)="onCategoryChange($event.value)">
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Ordenar por duração</mat-label>
+      <mat-select (selectionChange)="onSortChange($event.value)">
+        <mat-option *ngFor="let option of sortOptions" [value]="option.value">
+          {{ option.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+</div>
+  

@@ -1,0 +1,20 @@
+<mat-card *ngIf="course$ | async as course" class="course-details-card">
+  <img mat-card-image [src]="course.image" alt="{{ course.name }}">
+  <mat-card-content>
+    <h1>{{ course.name }}</h1>
+    <p>{{ course.description }}</p>
+    <span class="category">{{ course.category }}</span>
+    <span class="duration">{{ course.duration }} horas</span>
+    
+    <h3>Conteúdo do curso:</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let lesson of course.lessons">
+        {{ lesson.title }} - {{ lesson.duration }}h
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
+<button mat-raised-button color="primary" (click)="goBack()">
+  Voltar
+</button>

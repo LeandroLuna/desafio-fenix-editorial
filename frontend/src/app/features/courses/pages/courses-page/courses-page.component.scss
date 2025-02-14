@@ -1,0 +1,19 @@
+.options-container {
+    display: flex;
+    gap: 16px;        
+    align-items: center;
+    flex-wrap: wrap;  
+  
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+}
+  
+app-search-bar {
+    flex: 1;
+}
+
+app-courses-filter {
+    flex: 1;
+}

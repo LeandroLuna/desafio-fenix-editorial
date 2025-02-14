@@ -1,0 +1,10 @@
+<mat-card *ngFor="let course of courses" class="course-card">
+  <img mat-card-image [src]="course.image" alt="{{ course.name }}">
+  <mat-card-content>
+    <h2>{{ course.name }}</h2>
+    <p>{{ course.description }}</p>
+    <span class="category">{{ course.category }}</span>
+    <span class="duration">{{ course.duration }} horas</span>
+    <button mat-button color="primary" [routerLink]="['/courses', course.id]">Ver detalhes</button>
+  </mat-card-content>
+</mat-card>
