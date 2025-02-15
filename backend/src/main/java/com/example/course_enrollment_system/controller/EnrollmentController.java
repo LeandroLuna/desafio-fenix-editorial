@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import com.example.course_enrollment_system.exception.ResourceNotFoundException;
+import static com.example.course_enrollment_system.util.MessageConstants.ENROLLMENT_NOT_FOUND;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -55,23 +57,22 @@ public class EnrollmentController {
             return dto;
         }).toList();
 
-        return enrollments.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
-                                     : new ResponseEntity<>(enrollments, HttpStatus.OK);
+        return ResponseEntity.ok(enrollments);
     }
 
     @Operation(summary = "Buscar matrícula por ID")
     @GetMapping("/{id}")
     public ResponseEntity<EnrollmentDTO> getEnrollmentById(@PathVariable Long id) {
         Enrollment enrollment = enrollmentService.getEnrollmentById(id);
-        if (enrollment != null) {
-            EnrollmentDTO dto = new EnrollmentDTO();
-            dto.setId(enrollment.getId());
-            dto.setCourseId(enrollment.getCourse().getId());
-            dto.setStudentId(enrollment.getStudent().getId());
-            dto.setEnrollmentDate(enrollment.getEnrollmentDate());
-            return new ResponseEntity<>(dto, HttpStatus.OK);
+        if (enrollment == null) {
+            throw new ResourceNotFoundException(ENROLLMENT_NOT_FOUND + id);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        EnrollmentDTO dto = new EnrollmentDTO();
+        dto.setId(enrollment.getId());
+        dto.setCourseId(enrollment.getCourse().getId());
+        dto.setStudentId(enrollment.getStudent().getId());
+        dto.setEnrollmentDate(enrollment.getEnrollmentDate());
+        return ResponseEntity.ok(dto);
     }
 
     @Operation(summary = "Atualizar matrícula existente")
@@ -79,25 +80,25 @@ public class EnrollmentController {
     public ResponseEntity<EnrollmentDTO> updateEnrollment(@PathVariable Long id, @Valid @RequestBody EnrollmentDTO enrollmentDTO) {
         Enrollment enrollment = new Enrollment();
         enrollment.setId(id);
-        enrollment.setCourse(courseService.getCourseById(enrollmentDTO.getCourseId()).orElseThrow(() -> new RuntimeException("Course not found")));
-        enrollment.setStudent(studentService.getStudentById(enrollmentDTO.getStudentId()).orElseThrow(() -> new RuntimeException("Student not found")));
+        enrollment.setCourse(courseService.getCourseById(enrollmentDTO.getCourseId()).orElseThrow(() -> new ResourceNotFoundException("Course not found")));
+        enrollment.setStudent(studentService.getStudentById(enrollmentDTO.getStudentId()).orElseThrow(() -> new ResourceNotFoundException("Student not found")));
         enrollment.setEnrollmentDate(enrollmentDTO.getEnrollmentDate());
 
         Enrollment updatedEnrollment = enrollmentService.updateEnrollment(id, enrollment);
-
-        if (updatedEnrollment != null) {
-            enrollmentDTO.setId(updatedEnrollment.getId());
-            enrollmentDTO.setEnrollmentDate(updatedEnrollment.getEnrollmentDate());
-            return new ResponseEntity<>(enrollmentDTO, HttpStatus.OK);
+        if (updatedEnrollment == null) {
+            throw new ResourceNotFoundException("Enrollment not found with id: " + id);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        enrollmentDTO.setId(updatedEnrollment.getId());
+        enrollmentDTO.setEnrollmentDate(updatedEnrollment.getEnrollmentDate());
+        return ResponseEntity.ok(enrollmentDTO);
     }
 
     @Operation(summary = "Excluir matrícula")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEnrollment(@PathVariable Long id) {
-        boolean deleted = enrollmentService.deleteEnrollment(id);
-        return deleted ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
-                       : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (!enrollmentService.deleteEnrollment(id)) {
+            throw new ResourceNotFoundException(ENROLLMENT_NOT_FOUND + id);
+        }
+        return ResponseEntity.noContent().build();
     }
 }

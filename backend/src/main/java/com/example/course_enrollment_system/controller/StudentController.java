@@ -9,17 +9,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
+import com.example.course_enrollment_system.exception.ResourceNotFoundException;
+import static com.example.course_enrollment_system.util.MessageConstants.STUDENT_NOT_FOUND;
 import java.util.List;
+import com.example.course_enrollment_system.dto.CourseDTO;
+import com.example.course_enrollment_system.service.EnrollmentService;
 
 @RestController
 @RequestMapping("/api/students")
 @Tag(name = "Alunos", description = "API para gerenciamento de alunos")
 public class StudentController {
     private final StudentService studentService;
+    private final EnrollmentService enrollmentService;
 
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService, EnrollmentService enrollmentService) {
         this.studentService = studentService;
+        this.enrollmentService = enrollmentService;
     }
 
     @Operation(summary = "Listar todos os alunos")
@@ -33,22 +38,21 @@ public class StudentController {
             return dto;
         }).toList();
 
-        return students.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
-                                  : new ResponseEntity<>(students, HttpStatus.OK);
+        return ResponseEntity.ok(students);
     }
 
     @Operation(summary = "Buscar aluno por ID")
     @GetMapping("/{id}")
     public ResponseEntity<StudentDTO> getStudentById(@PathVariable Long id) {
         return studentService.getStudentById(id)
-                .map(student -> {
-                    StudentDTO dto = new StudentDTO();
-                    dto.setId(student.getId());
-                    dto.setName(student.getName());
-                    dto.setEmail(student.getEmail());
-                    return new ResponseEntity<>(dto, HttpStatus.OK);
-                })
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            .map(student -> {
+                StudentDTO dto = new StudentDTO();
+                dto.setId(student.getId());
+                dto.setName(student.getName());
+                dto.setEmail(student.getEmail());
+                return ResponseEntity.ok(dto);
+            })
+            .orElseThrow(() -> new ResourceNotFoundException(STUDENT_NOT_FOUND + id));
     }
 
     @Operation(summary = "Criar novo aluno")
@@ -72,20 +76,41 @@ public class StudentController {
         student.setEmail(studentDTO.getEmail());
 
         Student updatedStudent = studentService.updateStudent(id, student);
-
-        if (updatedStudent != null) {
-            studentDTO.setId(updatedStudent.getId());
-            return new ResponseEntity<>(studentDTO, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (updatedStudent == null) {
+            throw new ResourceNotFoundException(STUDENT_NOT_FOUND + id);
         }
+        studentDTO.setId(updatedStudent.getId());
+        return ResponseEntity.ok(studentDTO);
     }
 
     @Operation(summary = "Excluir aluno")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
-        boolean deleted = studentService.deleteStudent(id);
-        return deleted ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
-                       : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (!studentService.deleteStudent(id)) {
+            throw new ResourceNotFoundException(STUDENT_NOT_FOUND + id);
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Listar cursos em que um aluno está matriculado")
+    @GetMapping("/{id}/courses")
+    public ResponseEntity<List<CourseDTO>> getCoursesByStudent(@PathVariable Long id) {
+        if (!studentService.getStudentById(id).isPresent()) {
+            throw new ResourceNotFoundException(STUDENT_NOT_FOUND + id);
+        }
+
+        List<CourseDTO> courses = enrollmentService.getEnrollmentsByStudent(id)
+            .stream()
+            .map(enrollment -> {
+                CourseDTO dto = new CourseDTO();
+                dto.setId(enrollment.getCourse().getId());
+                dto.setName(enrollment.getCourse().getName());
+                dto.setDescription(enrollment.getCourse().getDescription());
+                dto.setDuration(enrollment.getCourse().getDuration());
+                return dto;
+            })
+            .toList();
+
+        return ResponseEntity.ok(courses);
     }
 }
