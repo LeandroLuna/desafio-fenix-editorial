@@ -1,0 +1,592 @@
+{
+	"info": {
+		"_postman_id": "1ce9e05a-58dc-4c20-a16f-157a0ecb590b",
+		"name": "Fenix Editorial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19181815"
+	},
+	"item": [
+		{
+			"name": "Auth/Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/auth/login",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Courses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTczNzI0NiwiZXhwIjoxNzM5NzQwODQ2fQ.4_bM8UeX2EcwO9_LZV5RWRG7duQ72xoErvE0T6eqIh9dKVnNP_bD58VwypfGAwr-ebGCISievQKVEC0rSkyrhA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Spring Boot\",\n    \"description\": \"Curso completo de Spring Boot\",\n    \"duration\": 40\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/courses",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Courses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY2NDI1OCwiZXhwIjoxNzM5NjY3ODU4fQ.efaJEiI2les4g9paJwr1iFMmZ9MBw10Op7TAoEBpucLhXtWaVTRH-WHUFp_q6BLnEqH-4xWvHAzTTLLj5sA7AA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/courses",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Courses ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY2NDI1OCwiZXhwIjoxNzM5NjY3ODU4fQ.efaJEiI2les4g9paJwr1iFMmZ9MBw10Op7TAoEBpucLhXtWaVTRH-WHUFp_q6BLnEqH-4xWvHAzTTLLj5sA7AA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/courses/1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"courses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Courses ID Students",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY1Nzk0OSwiZXhwIjoxNzM5NjYxNTQ5fQ.5GM-AIoS8kaXfhMEhcMpccO6iNR3G4iqg3Zc5Qv2Xqxu-h62ISbacPmSBbJU83qIcarfJjR6481wuxybZ0GjWg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/courses/1/students",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"courses",
+						"1",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Courses ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY2NDI1OCwiZXhwIjoxNzM5NjY3ODU4fQ.efaJEiI2les4g9paJwr1iFMmZ9MBw10Op7TAoEBpucLhXtWaVTRH-WHUFp_q6BLnEqH-4xWvHAzTTLLj5sA7AA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/courses/1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"courses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Courses ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY0Nzk0MywiZXhwIjoxNzM5NjUxNTQzfQ.Kcq5GLSHw3aTix7cx6Vj39hqU8nt9Lto60Otx_xLVzuCHZjqp0O59GY4RfRTJhoJGxEvgOdeRVcVsjVWffwnKg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Spring\",\n    \"description\": \"Curso completo de Spring\",\n    \"duration\": 80\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/courses/1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"courses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Students",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY1Nzk0OSwiZXhwIjoxNzM5NjYxNTQ5fQ.5GM-AIoS8kaXfhMEhcMpccO6iNR3G4iqg3Zc5Qv2Xqxu-h62ISbacPmSBbJU83qIcarfJjR6481wuxybZ0GjWg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Leandro\",\n    \"email\": \"leandro@email.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/students",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Students",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY1NjQzMCwiZXhwIjoxNzM5NjYwMDMwfQ.-6JLUmWPUW9WVmHZqFTNgZCfM3C0ks4bpfa3c_3gzgnGS8gEyf6bb6THmjLUWSrA4GUyiT5M5W_Nwpz8ArEzTQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/students",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Students ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY1Nzk0OSwiZXhwIjoxNzM5NjYxNTQ5fQ.5GM-AIoS8kaXfhMEhcMpccO6iNR3G4iqg3Zc5Qv2Xqxu-h62ISbacPmSBbJU83qIcarfJjR6481wuxybZ0GjWg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/students/1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"students",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Students ID Courses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY1Nzk0OSwiZXhwIjoxNzM5NjYxNTQ5fQ.5GM-AIoS8kaXfhMEhcMpccO6iNR3G4iqg3Zc5Qv2Xqxu-h62ISbacPmSBbJU83qIcarfJjR6481wuxybZ0GjWg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/students/1/courses",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"students",
+						"1",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Students ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY1Nzk0OSwiZXhwIjoxNzM5NjYxNTQ5fQ.5GM-AIoS8kaXfhMEhcMpccO6iNR3G4iqg3Zc5Qv2Xqxu-h62ISbacPmSBbJU83qIcarfJjR6481wuxybZ0GjWg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Luna\",\n    \"email\": \"Luna@email.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/students/1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"students",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Students ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY1NTU0OSwiZXhwIjoxNzM5NjU5MTQ5fQ.1aeUPNf6Sa7zugyxERPVNy0Zid-Xa3DpCntSdlyB7Mm1REoUrBRm2e3rrtZjLR_q2UiXjI5GLJTtiwdzJswO1Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/students/1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"students",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enrollments",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY1Nzk0OSwiZXhwIjoxNzM5NjYxNTQ5fQ.5GM-AIoS8kaXfhMEhcMpccO6iNR3G4iqg3Zc5Qv2Xqxu-h62ISbacPmSBbJU83qIcarfJjR6481wuxybZ0GjWg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"courseId\": 2,\n    \"studentId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/enrollments",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"enrollments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enrollments",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY1NjQzMCwiZXhwIjoxNzM5NjYwMDMwfQ.-6JLUmWPUW9WVmHZqFTNgZCfM3C0ks4bpfa3c_3gzgnGS8gEyf6bb6THmjLUWSrA4GUyiT5M5W_Nwpz8ArEzTQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/enrollments",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"enrollments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enrollments ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY1NjQzMCwiZXhwIjoxNzM5NjYwMDMwfQ.-6JLUmWPUW9WVmHZqFTNgZCfM3C0ks4bpfa3c_3gzgnGS8gEyf6bb6THmjLUWSrA4GUyiT5M5W_Nwpz8ArEzTQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/enrollments/1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"enrollments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enrollments ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY1NjE3NywiZXhwIjoxNzM5NjU5Nzc3fQ.AtNa2ub5CEyPvNRPORIYg6aFVNfkIL8hDNyvyGM4vn0G4XdaxP-PvxQSCmMpWa2RY4oYzJAsTJJemXAh5MnS5A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/enrollments/1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"enrollments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enrollments ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczOTY1Nzk0OSwiZXhwIjoxNzM5NjYxNTQ5fQ.5GM-AIoS8kaXfhMEhcMpccO6iNR3G4iqg3Zc5Qv2Xqxu-h62ISbacPmSBbJU83qIcarfJjR6481wuxybZ0GjWg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"courseId\": 1,\n    \"studentId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/enrollments/1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"enrollments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:8080/api",
+			"type": "string"
+		}
+	]
+}
