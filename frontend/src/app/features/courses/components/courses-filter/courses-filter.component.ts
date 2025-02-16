@@ -7,8 +7,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './courses-filter.component.scss'
 })
 export class CoursesFilterComponent {
-  @Output() filterCategory = new EventEmitter<string>();
-  @Output() sortDuration = new EventEmitter<string>();
+  @Output() categoryChange = new EventEmitter<string>();
+  @Output() sortChange = new EventEmitter<string>();
 
   categories: string[] = ['Todos', 'Programação', 'Design', 'Marketing'];
   sortOptions: { value: string; label: string }[] = [
@@ -19,10 +19,10 @@ export class CoursesFilterComponent {
   constructor() {}
 
   onCategoryChange(category: string): void {
-    this.filterCategory.emit(category);
+    this.categoryChange.emit(category);
   }
 
   onSortChange(sort: string): void {
-    this.sortDuration.emit(sort);
+    this.sortChange.emit(sort);
   }
 }

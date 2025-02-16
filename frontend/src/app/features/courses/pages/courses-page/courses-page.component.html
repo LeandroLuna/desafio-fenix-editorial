@@ -1,8 +1,8 @@
 <div class="options-container">
   <app-search-bar (search)="onSearch($event)"></app-search-bar>
   <app-courses-filter
-    (filterCategory)="onCategoryChange($event)"
-    (sortDuration)="onSortChange($event)">
+    (categoryChange)="onCategoryChange($event)"
+    (sortChange)="onSortChange($event)">
   </app-courses-filter>
 </div>
 
