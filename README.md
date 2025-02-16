@@ -6,6 +6,8 @@ Teste técnico para desenvolvedor na empresa Fenix Editorial.
 
 Uma plataforma responsiva para visualização e interação com cursos online, oferecendo uma experiência intuitiva para alunos explorarem e se matricularem em diferentes cursos.
 
+Deploy: [Online Course Platform - Vercel](https://onlinecourseplatform-gamma.vercel.app/courses)
+
 ### Tecnologias utilizadas
 - Angular 17
 - NgRx (Gerenciamento de Estado)
