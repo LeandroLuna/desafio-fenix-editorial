@@ -104,22 +104,22 @@ Senha: admin123
 ## Requisitos implementados
 
 ### Frontend
-✅ Listagem de Cursos
-✅ Filtros e Ordenação
-✅ Pesquisa
-✅ Detalhes do Curso
-✅ Responsividade
-✅ Estado Global (NgRx)
-✅ Testes Automatizados
+- ✅ Listagem de Cursos
+- ✅ Filtros e Ordenação
+- ✅ Pesquisa
+- ✅ Detalhes do Curso
+- ✅ Responsividade
+- ✅ Estado Global (NgRx)
+- ✅ Testes Automatizados
 
 ### Backend
-✅ CRUD completo (Cursos, Alunos, Matrículas)
-✅ Relacionamentos entre entidades
-✅ Validações de campos e regras de negócio
-✅ Autenticação JWT
-✅ Documentação OpenAPI/Swagger
-✅ Testes unitários e de integração
-✅ Containerização com Docker
+- ✅ CRUD completo (Cursos, Alunos, Matrículas)
+- ✅ Relacionamentos entre entidades
+- ✅ Validações de campos e regras de negócio
+- ✅ Autenticação JWT
+- ✅ Documentação OpenAPI/Swagger
+- ✅ Testes unitários e de integração
+- ✅ Containerização com Docker
 
 ## Observações
 - O sistema utiliza banco de dados em memória (H2) para facilitar testes e execução
