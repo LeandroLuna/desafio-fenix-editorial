@@ -1,10 +1,25 @@
-<mat-card *ngFor="let course of courses" class="course-card">
-  <img mat-card-image [src]="course.image" alt="{{ course.name }}">
-  <mat-card-content>
-    <h2>{{ course.name }}</h2>
-    <p>{{ course.description }}</p>
-    <span class="category">{{ course.category }}</span>
-    <span class="duration">{{ course.duration }} horas</span>
-    <button mat-button color="primary" [routerLink]="['/courses', course.id]">Ver detalhes</button>
-  </mat-card-content>
-</mat-card>
+<div class="courses-grid">
+  <mat-card *ngFor="let course of courses" class="course-card">
+    <div class="course-image-container">
+      <img mat-card-image [src]="course.image" alt="{{ course.name }}">
+    </div>
+    <mat-card-content>
+      <h2 class="course-title">{{ course.name }}</h2>
+      <p class="course-description">{{ course.description }}</p>
+      <div class="course-details">
+        <span class="category">
+          <mat-icon>category</mat-icon>
+          {{ course.category }}
+        </span>
+        <span class="duration">
+          <mat-icon>schedule</mat-icon>
+          {{ course.duration }} horas
+        </span>
+      </div>
+      <button mat-raised-button color="primary" [routerLink]="['/courses', course.id]">
+        <mat-icon>visibility</mat-icon>
+        Ver detalhes
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>

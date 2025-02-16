@@ -1,6 +1,11 @@
 .courses-filter-container {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+
+    mat-form-field {
+        flex: 1;
+        margin-bottom: -1.25em;
+    }
 }

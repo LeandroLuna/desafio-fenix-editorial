@@ -1,6 +1,11 @@
 <div class="options-container">
-  <app-search-bar (search)="onSearch($event)"></app-search-bar>
+  <app-search-bar 
+    [initialTerm]="(currentSearchTerm$ | async) ?? ''"
+    (search)="onSearch($event)">
+  </app-search-bar>
   <app-courses-filter
+    [initialCategory]="(currentCategory$ | async) ?? 'Todos'"
+    [initialSortOrder]="(currentSortOrder$ | async) ?? 'desc'"
     (categoryChange)="onCategoryChange($event)"
     (sortChange)="onSortChange($event)">
   </app-courses-filter>

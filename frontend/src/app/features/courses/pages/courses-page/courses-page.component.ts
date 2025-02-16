@@ -15,11 +15,17 @@ export class CoursesPageComponent implements OnInit {
   courses$: Observable<Course[]>;
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
+  currentCategory$: Observable<string>;
+  currentSearchTerm$: Observable<string>;
+  currentSortOrder$: Observable<string>;
 
   constructor(private store: Store) {
     this.courses$ = this.store.select(CoursesSelectors.selectFilteredCourses);
     this.loading$ = this.store.select(CoursesSelectors.selectLoading);
     this.error$ = this.store.select(CoursesSelectors.selectError);
+    this.currentCategory$ = this.store.select(CoursesSelectors.selectCategory);
+    this.currentSearchTerm$ = this.store.select(CoursesSelectors.selectSearchTerm);
+    this.currentSortOrder$ = this.store.select(CoursesSelectors.selectSortOrder);
   }
 
   ngOnInit(): void {

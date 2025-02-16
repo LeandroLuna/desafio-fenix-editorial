@@ -44,3 +44,18 @@ export const selectError = createSelector(
   selectCoursesState,
   (state) => state.error
 );
+
+export const selectCategory = createSelector(
+  selectFilters,
+  (filters) => filters.category || 'Todos'
+);
+
+export const selectSearchTerm = createSelector(
+  selectFilters,
+  (filters) => filters.searchTerm || ''
+);
+
+export const selectSortOrder = createSelector(
+  selectFilters,
+  (filters) => filters.sortOrder || 'desc'
+);
