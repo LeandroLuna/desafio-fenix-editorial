@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
 import { Course } from '../models/course.model';
 import { delay, map, Observable, of } from 'rxjs';
+import { isPlatformServer } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesMockService {
+  private platformId = inject(PLATFORM_ID);
+  
   private mockCourses: Course[] = [
     {
       id: 1,
@@ -90,14 +93,17 @@ export class CoursesMockService {
   constructor() { }
 
   getCourses(): Observable<Course[]> {
-    return of(this.mockCourses).pipe(
-      map(courses => courses ?? []),
-      delay(1000) 
-    );
+    if (isPlatformServer(this.platformId)) {
+      return of(this.mockCourses);
+    }
+    return of(this.mockCourses).pipe(delay(300));
   }
 
   getCourseById(id: number): Observable<Course | undefined> {
-    const course = this.mockCourses.find(course => course.id === id);
-    return of(course).pipe(delay(500));
+    const course = this.mockCourses.find(c => c.id === id);
+    if (isPlatformServer(this.platformId)) {
+      return of(course);
+    }
+    return of(course).pipe(delay(300));
   }
 }

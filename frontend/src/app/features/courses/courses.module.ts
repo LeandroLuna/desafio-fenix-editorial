@@ -20,7 +20,7 @@ import { SearchBarComponent } from '../../shared/components/search-bar/search-ba
     CommonModule,
     MaterialModule,
     CoursesRoutingModule,
-    SearchBarComponent
+    SearchBarComponent  
   ]
 })
 export class CoursesModule { }

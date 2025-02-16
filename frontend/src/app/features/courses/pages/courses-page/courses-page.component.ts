@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Course } from '../../models/course.model';
-import { CoursesMockService } from '../../services/courses-mock.service';
+import * as CoursesActions from '../../store/actions/courses.actions';
+import * as CoursesSelectors from '../../store/selectors/courses.selectors';
 
 @Component({
   selector: 'app-courses-page',
@@ -9,47 +11,30 @@ import { CoursesMockService } from '../../services/courses-mock.service';
   templateUrl: './courses-page.component.html',
   styleUrl: './courses-page.component.scss'
 })
-export class CoursesPageComponent {
-  private categoryFilter$ = new BehaviorSubject<string>('Todos');
-  private sortOption$ = new BehaviorSubject<string>('asc');
-  searchTerm$ = new BehaviorSubject<string>('');
+export class CoursesPageComponent implements OnInit {
+  courses$: Observable<Course[]>;
+  loading$: Observable<boolean>;
+  error$: Observable<string | null>;
 
-  courses$!: Observable<Course[]>;
-
-  constructor(private coursesMockService: CoursesMockService) {}
+  constructor(private store: Store) {
+    this.courses$ = this.store.select(CoursesSelectors.selectFilteredCourses);
+    this.loading$ = this.store.select(CoursesSelectors.selectLoading);
+    this.error$ = this.store.select(CoursesSelectors.selectError);
+  }
 
   ngOnInit(): void {
-    const allCourses$ = this.coursesMockService.getCourses().pipe(
-      map(courses => courses ?? []),
-      startWith([])
-    );
-  
-    this.courses$ = combineLatest([allCourses$, this.categoryFilter$, this.sortOption$, this.searchTerm$]).pipe(
-      map(([courses, category, sort, term]) => {
-        let filteredCourses = courses.filter(course =>
-          course.name.toLowerCase().includes(term.toLowerCase())
-        );
-
-        if (category !== 'Todos') {
-          filteredCourses = filteredCourses.filter(course => course.category === category);
-        }
-
-        return filteredCourses.sort((a, b) => 
-          sort === 'asc' ? a.duration - b.duration : b.duration - a.duration
-        );
-      })
-    );
+    this.store.dispatch(CoursesActions.loadCourses());
   }
 
   onCategoryChange(category: string): void {
-    this.categoryFilter$.next(category);
+    this.store.dispatch(CoursesActions.setCategoryFilter({ category }));
   }
 
-  onSortChange(sort: string): void {
-    this.sortOption$.next(sort);
+  onSortChange(sortOrder: string): void {
+    this.store.dispatch(CoursesActions.setSortOrder({ sortOrder }));
   }
 
-  onSearch(term: string): void {
-    this.searchTerm$.next(term);
+  onSearch(searchTerm: string): void {
+    this.store.dispatch(CoursesActions.setSearchTerm({ searchTerm }));
   }
 }
