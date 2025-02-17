@@ -4,7 +4,7 @@ Teste técnico para desenvolvedor na empresa Fenix Editorial.
 
 ## Frontend (Angular) - Plataforma de Cursos Online
 
-Uma plataforma responsiva para visualização e interação com cursos online, oferecendo uma experiência intuitiva para alunos explorarem e se matricularem em diferentes cursos.
+Uma plataforma responsiva para visualização e interação com cursos online, oferecendo uma experiência intuitiva para alunos explorarem diferentes cursos.
 
 Deploy: [Online Course Platform - Vercel](https://onlinecourseplatform-gamma.vercel.app/courses)
 
