@@ -125,7 +125,7 @@ Senha: admin123
 
 ## Observações
 - O sistema utiliza banco de dados em memória (H2) para facilitar testes e execução
-- Todos os endpoints da API requerem autenticação (exceto /api/auth/login). A autenticação é feita através de JWT. 
+- Todos os endpoints da API requerem autenticação (exceto /api/auth/login e rotas de documentação). A autenticação é feita através de JWT. 
 - - Para testar a aplicação, pode-se utilizar as credenciais padrão (Usuário: admin, Senha: admin123). 
 - - Acesse a rota `/api/auth/login` para obter o token de autenticação das demais rotas.
 - Os dados são resetados ao reiniciar a aplicação.
